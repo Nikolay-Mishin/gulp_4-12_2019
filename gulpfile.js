@@ -45,6 +45,7 @@ const path = {
 	clean: `${build}`
 };
 
+// Таск для очистки папки build
 gulp.task('clean', function (callback) {
 	rimraf(path.clean, callback);
 });
@@ -79,7 +80,7 @@ gulp.task('scss', function (callback) {
 			})
 		}))
 		.pipe( sourcemaps.init() )
-		.pipe( sass() )
+		.pipe( sass() ) // CSS
 		.pipe( autoprefixer({
 			overrideBrowserslist: ['last 4 versions']
 		}) )
@@ -95,12 +96,14 @@ gulp.task('copy:img', function (callback) {
 	callback();
 });
 
+// Таск для копирования картинок Upload
 gulp.task('copy:upload', function (callback) {
 	return gulp.src(path.upload.src)
 		.pipe(gulp.dest(path.upload.build))
 	callback();
 });
 
+// Таск для копирования скриптов
 gulp.task('copy:js', function (callback) {
 	return gulp.src(path.js.src)
 		.pipe(gulp.dest(path.js.build))
@@ -112,9 +115,6 @@ gulp.task('watch', function() {
 	// Слежение за HTML и CSS и обновление браузера
 	watch([path.watch.html, path.watch.css], gulp.parallel( browserSync.reload ));
 
-	// Слежение за SCSS и компиляция в CSS - обычный способ
-	// watch('./app/scss/**/*.scss', gulp.parallel('scss'));
-
 	// Запуск слежения и компиляции SCSS с задержкой, для жестких дисков HDD
 	watch(path.watch.scss, function() {
 		setTimeout( gulp.parallel('scss'), 1000 )
@@ -123,6 +123,7 @@ gulp.task('watch', function() {
 	// Слежение за HTML и сборка страниц и шаблонов
 	watch(path.watch.html_src, gulp.parallel('html'));
 
+	// Слежение и копирование статических файлов и скриптов
 	watch(path.watch.img, gulp.parallel('copy:img'));
 	watch(path.watch.upload, gulp.parallel('copy:upload'));
 	watch(path.watch.js, gulp.parallel('copy:js'));
@@ -132,14 +133,13 @@ gulp.task('watch', function() {
 gulp.task('server', function() {
 	browserSync.init({
 		server: {
-			baseDir: `${build}` // "./app/"
+			baseDir: `${build}`
 		}
 	})
 });
 
 // Дефолтный таск (задача по умолчанию)
 // Запускаем одновременно задачи server и watch
-// gulp.task('default', gulp.parallel('server', 'watch', 'scss', 'html'));
 gulp.task('default', gulp.series(
 	'clean',
 	gulp.parallel('scss', 'html', 'copy:img', 'copy:upload', 'copy:js'),
