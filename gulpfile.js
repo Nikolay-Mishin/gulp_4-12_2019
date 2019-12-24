@@ -96,4 +96,5 @@ gulp.task('server', function() {
 
 // Дефолтный таск (задача по умолчанию)
 // Запускаем одновременно задачи server и watch
-gulp.task('default', gulp.parallel('server', 'watch', 'scss', 'html'));
+// gulp.task('default', gulp.parallel('server', 'watch', 'scss', 'html'));
+gulp.task('default', gulp.series(gulp.parallel('scss', 'html'), gulp.parallel('server', 'watch') ));
