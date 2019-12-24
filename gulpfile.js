@@ -6,7 +6,8 @@ const gulp = require('gulp'), // Подключаем Gulp
 	sourcemaps = require('gulp-sourcemaps'),
 	notify = require('gulp-notify'),
 	plumber = require('gulp-plumber'),
-	fileinclude = require('gulp-file-include'); // Для подключения файлов друг в друга
+	fileinclude = require('gulp-file-include'), // Для подключения файлов друг в друга
+	rimraf = require('rimraf'); // удаление файлов
 
 const build = './build',
 	src = './src';
@@ -20,17 +21,37 @@ const path = {
 		build: `${build}/css/`,
 		src: `${src}/scss/main.scss`
 	},
+	img: {
+		build: `${build}/images/`,
+		src: `${src}/images/**/*.*`
+	},
+	upload: {
+		build: `${build}/upload/`,
+		src: `${src}/upload/**/*.*`
+	},
+	js: {
+		build: `${build}/js/`,
+		src: `${src}/js/**/*.js`
+	},
 	watch: {
 		html: `${build}/*.html`,
 		css: `${build}/css/**/*.css`,
 		scss: `${src}/scss/**/*.scss`,
-		html_src: `${src}/html/**/*.html`
-	}
+		html_src: `${src}/html/**/*.html`,
+		img: `${src}/images/**/*.*`,
+		upload: `${src}/upload/**/*.*`,
+		js: `${src}/js/**/*.js`
+	},
+	clean: `${build}`
 };
+
+gulp.task('clean', function (callback) {
+	rimraf(path.clean, callback);
+});
 
 // Таск для сборки HTML и шаблонов
 gulp.task('html', function (callback) {
-	return gulp.src(path.html.src) // './app/html/*.html'
+	return gulp.src(path.html.src)
 		.pipe( plumber({
 			errorHandler: notify.onError(function (err) {
 				return {
@@ -41,13 +62,13 @@ gulp.task('html', function (callback) {
 			})
 		}))
 		.pipe( fileinclude({ prefix: '@@' }) )
-		.pipe( gulp.dest(path.html.build) ) // './app/'
+		.pipe( gulp.dest(path.html.build) )
 	callback();
 });
 
 // Таск для компиляции SCSS в CSS
 gulp.task('scss', function (callback) {
-	return gulp.src(path.css.src) // './app/scss/main.scss'
+	return gulp.src(path.css.src)
 		.pipe( plumber({
 			errorHandler: notify.onError(function (err) {
 				return {
@@ -63,26 +84,48 @@ gulp.task('scss', function (callback) {
 			overrideBrowserslist: ['last 4 versions']
 		}) )
 		.pipe( sourcemaps.write() )
-		.pipe( gulp.dest(path.css.build) ) // './app/css/'
+		.pipe( gulp.dest(path.css.build) )
+	callback();
+});
+
+// Таск для копирования картинок
+gulp.task('copy:img', function (callback) {
+	return gulp.src(path.img.src)
+		.pipe(gulp.dest(path.img.build))
+	callback();
+});
+
+gulp.task('copy:upload', function (callback) {
+	return gulp.src(path.upload.src)
+		.pipe(gulp.dest(path.upload.build))
+	callback();
+});
+
+gulp.task('copy:js', function (callback) {
+	return gulp.src(path.js.src)
+		.pipe(gulp.dest(path.js.build))
 	callback();
 });
 
 // Слежение за HTML и CSS и обновление браузера
 gulp.task('watch', function() {
 	// Слежение за HTML и CSS и обновление браузера
-	watch([path.watch.html, path.watch.css], gulp.parallel( browserSync.reload )); // './app/*.html', './app/css/**/*.css'
+	watch([path.watch.html, path.watch.css], gulp.parallel( browserSync.reload ));
 
 	// Слежение за SCSS и компиляция в CSS - обычный способ
 	// watch('./app/scss/**/*.scss', gulp.parallel('scss'));
 
 	// Запуск слежения и компиляции SCSS с задержкой, для жестких дисков HDD
-	watch(path.watch.scss, function() { // './app/scss/**/*.scss'
+	watch(path.watch.scss, function() {
 		setTimeout( gulp.parallel('scss'), 1000 )
 	});
 
 	// Слежение за HTML и сборка страниц и шаблонов
-	watch(path.watch.html_src, gulp.parallel('html')); // './app/html/**/*.html'
+	watch(path.watch.html_src, gulp.parallel('html'));
 
+	watch(path.watch.img, gulp.parallel('copy:img'));
+	watch(path.watch.upload, gulp.parallel('copy:upload'));
+	watch(path.watch.js, gulp.parallel('copy:js'));
 });
 
 // Задача для старта сервера из папки app
@@ -97,4 +140,8 @@ gulp.task('server', function() {
 // Дефолтный таск (задача по умолчанию)
 // Запускаем одновременно задачи server и watch
 // gulp.task('default', gulp.parallel('server', 'watch', 'scss', 'html'));
-gulp.task('default', gulp.series(gulp.parallel('scss', 'html'), gulp.parallel('server', 'watch') ));
+gulp.task('default', gulp.series(
+	'clean',
+	gulp.parallel('scss', 'html', 'copy:img', 'copy:upload', 'copy:js'),
+	gulp.parallel('server', 'watch')
+));
