@@ -17,6 +17,10 @@ const path = {
 		build: `${build}/`,
 		src: `${src}/html/*.html`
 	},
+	pug: {
+		build: `${build}/`,
+		src: `${src}/pug/pages/**/*.pug`
+	},
 	css: {
 		build: `${build}/css/`,
 		src: `${src}/scss/main.scss`
@@ -48,6 +52,24 @@ const path = {
 // Таск для очистки папки build
 gulp.task('clean', function (callback) {
 	rimraf(path.clean, callback);
+});
+
+// Таск для сборки Gulp файлов
+gulp.task('pug', function() {
+	return gulp.src(path.pug.src)
+		.pipe( plumber({
+			errorHandler: notify.onError(function(err){
+				return {
+					title: 'Pug',
+					sound: false,
+					message: err.message
+				}
+			})
+		}))
+		.pipe( pug({
+			pretty: true
+		}) )
+		.pipe( gulp.dest(path.pug.build) )
 });
 
 // Таск для сборки HTML и шаблонов
