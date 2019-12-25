@@ -7,16 +7,13 @@ const gulp = require('gulp'), // Подключаем Gulp
 	notify = require('gulp-notify'),
 	plumber = require('gulp-plumber'),
 	fileinclude = require('gulp-file-include'), // Для подключения файлов друг в друга
-	rimraf = require('rimraf'); // удаление файлов
+	rimraf = require('rimraf'), // удаление файлов
+	pug = require('gulp-pug');
 
 const build = './build',
 	src = './src';
 
 const path = {
-	html: {
-		build: `${build}/`,
-		src: `${src}/html/*.html`
-	},
 	pug: {
 		build: `${build}/`,
 		src: `${src}/pug/pages/**/*.pug`
@@ -25,40 +22,33 @@ const path = {
 		build: `${build}/css/`,
 		src: `${src}/scss/main.scss`
 	},
-	img: {
-		build: `${build}/images/`,
-		src: `${src}/images/**/*.*`
-	},
-	upload: {
-		build: `${build}/upload/`,
-		src: `${src}/upload/**/*.*`
-	},
 	js: {
 		build: `${build}/js/`,
 		src: `${src}/js/**/*.js`
 	},
+	img: {
+		build: `${build}/img/`,
+		src: `${src}/img/**/*.*`
+	},
 	watch: {
-		html: `${build}/*.html`,
-		css: `${build}/css/**/*.css`,
+		js: `${build}/js/**/*.js`,
+		img: `${build}/img/**/*.*`,
 		scss: `${src}/scss/**/*.scss`,
-		html_src: `${src}/html/**/*.html`,
-		img: `${src}/images/**/*.*`,
-		upload: `${src}/upload/**/*.*`,
-		js: `${src}/js/**/*.js`
+		pug: `${src}/pug/**/*.pug`
 	},
 	clean: `${build}`
 };
 
 // Таск для очистки папки build
-gulp.task('clean', function (callback) {
+gulp.task('clean:build', function (callback) {
 	rimraf(path.clean, callback);
 });
 
 // Таск для сборки Gulp файлов
-gulp.task('pug', function() {
+gulp.task('pug', function (callback) {
 	return gulp.src(path.pug.src)
 		.pipe( plumber({
-			errorHandler: notify.onError(function(err){
+			errorHandler: notify.onError(function (err) {
 				return {
 					title: 'Pug',
 					sound: false,
@@ -70,6 +60,8 @@ gulp.task('pug', function() {
 			pretty: true
 		}) )
 		.pipe( gulp.dest(path.pug.build) )
+		.pipe( browserSync.stream() )
+	callback();
 });
 
 // Таск для компиляции SCSS в CSS
@@ -91,6 +83,7 @@ gulp.task('scss', function (callback) {
 		}) )
 		.pipe( sourcemaps.write() )
 		.pipe( gulp.dest(path.css.build) )
+		.pipe( browserSync.stream() )
 	callback();
 });
 
@@ -98,13 +91,6 @@ gulp.task('scss', function (callback) {
 gulp.task('copy:img', function (callback) {
 	return gulp.src(path.img.src)
 		.pipe(gulp.dest(path.img.build))
-	callback();
-});
-
-// Таск для копирования картинок Upload
-gulp.task('copy:upload', function (callback) {
-	return gulp.src(path.upload.src)
-		.pipe(gulp.dest(path.upload.build))
 	callback();
 });
 
@@ -117,21 +103,20 @@ gulp.task('copy:js', function (callback) {
 
 // Слежение за HTML и CSS и обновление браузера
 gulp.task('watch', function() {
-	// Слежение за HTML и CSS и обновление браузера
-	watch([path.watch.html, path.watch.css], gulp.parallel( browserSync.reload ));
+	// Следим за картинками и скриптами и обновляем браузер
+	watch([path.watch.js, path.watch.img], gulp.parallel( browserSync.reload ));
 
 	// Запуск слежения и компиляции SCSS с задержкой, для жестких дисков HDD
 	watch(path.watch.scss, function() {
 		setTimeout( gulp.parallel('scss'), 1000 )
 	});
 
-	// Слежение за HTML и сборка страниц и шаблонов
-	watch(path.watch.html_src, gulp.parallel('html'));
+	// Слежение за PUG и сборка
+	watch(path.watch.pug, gulp.parallel('pug'));
 
-	// Слежение и копирование статических файлов и скриптов
-	watch(path.watch.img, gulp.parallel('copy:img'));
-	watch(path.watch.upload, gulp.parallel('copy:upload'));
-	watch(path.watch.js, gulp.parallel('copy:js'));
+	// Следим за картинками и скриптами, и копируем их в build
+	watch(path.img.src, gulp.parallel('copy:img'));
+	watch(path.js.src, gulp.parallel('copy:js'));
 });
 
 // Задача для старта сервера из папки app
@@ -146,7 +131,7 @@ gulp.task('server', function() {
 // Дефолтный таск (задача по умолчанию)
 // Запускаем одновременно задачи server и watch
 gulp.task('default', gulp.series(
-	'clean',
-	gulp.parallel('scss', 'pug', 'copy:img', 'copy:upload', 'copy:js'),
+	gulp.parallel('clean:build'),
+	gulp.parallel('scss', 'pug', 'copy:img', 'copy:js'),
 	gulp.parallel('server', 'watch')
 ));
