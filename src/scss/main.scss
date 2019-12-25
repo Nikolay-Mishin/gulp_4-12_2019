@@ -1,9 +1,9 @@
-@import "blocks/reset";
-@import "blocks/tools";
-@import "blocks/common";
-@import "blocks/header";
-@import "blocks/footer";
-@import "blocks/sidebar";
-@import "blocks/content";
-@import "blocks/responsive";
-@import "blocks/retina";
+@import './blocks/_header.scss';
+
+$color: rgb(23, 0, 128);
+
+body {
+  color: $color;
+  display: flex;
+  transition: all 0.2s ease-in;
+}

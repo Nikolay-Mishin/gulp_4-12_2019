@@ -72,23 +72,6 @@ gulp.task('pug', function() {
 		.pipe( gulp.dest(path.pug.build) )
 });
 
-// Таск для сборки HTML и шаблонов
-gulp.task('html', function (callback) {
-	return gulp.src(path.html.src)
-		.pipe( plumber({
-			errorHandler: notify.onError(function (err) {
-				return {
-					title: 'HTML include',
-			        sound: false,
-			        message: err.message
-				}
-			})
-		}))
-		.pipe( fileinclude({ prefix: '@@' }) )
-		.pipe( gulp.dest(path.html.build) )
-	callback();
-});
-
 // Таск для компиляции SCSS в CSS
 gulp.task('scss', function (callback) {
 	return gulp.src(path.css.src)
@@ -164,6 +147,6 @@ gulp.task('server', function() {
 // Запускаем одновременно задачи server и watch
 gulp.task('default', gulp.series(
 	'clean',
-	gulp.parallel('scss', 'html', 'copy:img', 'copy:upload', 'copy:js'),
+	gulp.parallel('scss', 'pug', 'copy:img', 'copy:upload', 'copy:js'),
 	gulp.parallel('server', 'watch')
 ));
