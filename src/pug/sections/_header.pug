@@ -1,5 +1,11 @@
+include ./../mixins/_icon.pug
+
 header.header
-    a(href="index.html").header__link Главная
-    a(href="about.html").header__link О компании
-    a(href="news.html").header__link Новости
-    a(href="contacts.html").header__link Контакты
+	.header__block.socials
+		each icon in jsonData.socials
+			+icon(icon.name, icon.link)
+	.header__block
+		a(href="index.html").header__link Hipsum Blog
+	.header__block
+		img(src="img/icons/search.svg" , alt="Instagramm").icon.search
+		a(href="index.html").btn-link subscribe

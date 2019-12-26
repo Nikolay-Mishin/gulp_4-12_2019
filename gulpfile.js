@@ -8,12 +8,16 @@ const gulp = require('gulp'), // Подключаем Gulp
 	plumber = require('gulp-plumber'),
 	fileinclude = require('gulp-file-include'), // Для подключения файлов друг в друга
 	rimraf = require('rimraf'), // удаление файлов
-	pug = require('gulp-pug');
+	pug = require('gulp-pug'),
+	fs = require('fs');
 
 const build = './build',
 	src = './src';
 
 const path = {
+	json: {
+		htmlData: './html-data.json'
+	},
 	pug: {
 		build: `${build}/`,
 		src: `${src}/pug/pages/**/*.pug`
@@ -34,7 +38,8 @@ const path = {
 		js: `${build}/js/**/*.js`,
 		img: `${build}/img/**/*.*`,
 		scss: `${src}/scss/**/*.scss`,
-		pug: `${src}/pug/**/*.pug`
+		pug: `${src}/pug/**/*.pug`,
+		json: './html-data.json'
 	},
 	clean: `${build}`
 };
@@ -57,7 +62,10 @@ gulp.task('pug', function (callback) {
 			})
 		}))
 		.pipe( pug({
-			pretty: true
+			pretty: true,
+			locals: {
+				jsonData: JSON.parse(fs.readFileSync(path.json.htmlData, 'utf8'))
+			}
 		}) )
 		.pipe( gulp.dest(path.pug.build) )
 		.pipe( browserSync.stream() )
@@ -112,7 +120,7 @@ gulp.task('watch', function() {
 	});
 
 	// Слежение за PUG и сборка
-	watch(path.watch.pug, gulp.parallel('pug'));
+	watch([path.watch.pug, path.watch.json], gulp.parallel('pug'));
 
 	// Следим за картинками и скриптами, и копируем их в build
 	watch(path.img.src, gulp.parallel('copy:img'));

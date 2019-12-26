@@ -1,0 +1,12 @@
+mixin post(title, date, img_title, img, content)
+	.post__wrapper
+		.post__title= title
+		.post__date= date
+		img(src="img/icons/" + img , alt= title).post__img
+		.post__content= content
+		.post__footer
+			a(href="index.html").btn-link read more
+			.socials
+				each icon in jsonData.socials
+					+icon(icon.name, icon.link)
+		.post__end

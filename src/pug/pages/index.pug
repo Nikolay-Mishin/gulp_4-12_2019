@@ -1,7 +1,9 @@
 extends ./../layouts/main.pug
+include ./../mixins/_post.pug
 
 block variables
-    - const title = "Главная";
-
+	- const title = "Главная";
+	
 block content
-    h1 Это главная страница
+	each post in jsonData.posts
+		+post(post.title, post.date, post.img_title, post.img, post.content)
