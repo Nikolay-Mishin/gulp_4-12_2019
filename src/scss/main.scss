@@ -1,10 +1,5 @@
-@import './blocks/_header.scss';
-
-$color: rgb(23, 0, 128);
-
-body {
-  color: $color;
-  display: flex;
-  transition: all 0.2s ease-in;
-  background-color: pink;
-}
+@import "blocks/body";
+@import "blocks/header";
+@import "blocks/content";
+@import "blocks/footer";
+@import "blocks/card";
