@@ -1,0 +1,6 @@
+mixin post-recent(title, date, img_title, img)
+	.post-recent__wrapper
+		.post-recent__title= title
+		.post-recent__date= date
+		img(src="img/icons/" + img , alt= title).post-recent__img
+		.post-recent__end

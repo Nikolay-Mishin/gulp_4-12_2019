@@ -1,5 +1,6 @@
 extends ./../layouts/main.pug
 include ./../mixins/_post.pug
+include ./../mixins/_post-recent.pug
 
 block variables
 	- const title = "Главная";
@@ -7,3 +8,8 @@ block variables
 block content
 	each post in jsonData.posts
 		+post(post.title, post.date, post.img_title, post.img, post.content)
+
+block sidebar
+	a(href="index.html").post__btn Recent posts
+	each post in jsonData.posts
+		+post-recent(post.title, post.date, post.img_title, post.img)

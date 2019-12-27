@@ -1,8 +1,15 @@
 /* Content */
 
-.content {
-	width: 800px;
+.content__wrapper {
+	width: 1000px;
 	padding: 20px 0;
 	background-color: rgb(119, 176, 214);
+	text-align: center;
+}
+
+.content {
+	width: 70%;
+	padding: 20px 0;
+	background-color: rgb(84, 121, 147);
 	text-align: center;
 }
