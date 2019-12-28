@@ -1,15 +1,26 @@
 extends ./../layouts/main.pug
 include ./../mixins/_post.pug
-include ./../mixins/_post-recent.pug
+include ./../mixins/_post-sidebar.pug
+include ./../mixins/_instagram.pug
 
 block variables
 	- const title = "Главная";
 	
 block content
 	each post in jsonData.posts
-		+post(post.title, post.date, post.img_title, post.img, post.content)
+		+post(post)
 
 block sidebar
-	a(href="index.html").post__btn Recent posts
-	each post in jsonData.posts
-		+post-recent(post.title, post.date, post.img_title, post.img)
+	.recent-posts
+		a(href="index.html").post-sidebar__btn Recent posts
+		each post in jsonData.posts
+			+post-sidebar(post)
+	.popular-posts
+		a(href="index.html").post-sidebar__btn Popular posts
+		each post in jsonData.posts
+			+post-sidebar(post)
+	.instagram
+		a(href="index.html").post-sidebar__btn Instagram
+		.instagram__wrapper
+			each icon in jsonData.instagram
+				+instagram(icon)

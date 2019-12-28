@@ -1,10 +1,18 @@
 /* Footer */
 
 .footer {
-	width: 1200px;
+	width: 100%;
 	padding: 30px 100px;
 	background-color: rgb(196, 196, 196);
 	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.footer__wrapper {
+	width: 1000px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;

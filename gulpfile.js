@@ -15,9 +15,7 @@ const build = './build',
 	src = './src';
 
 const path = {
-	json: {
-		htmlData: './html-data.json'
-	},
+	json: `${src}/data/html-data.json`,
 	pug: {
 		build: `${build}/`,
 		src: `${src}/pug/pages/**/*.pug`
@@ -39,7 +37,7 @@ const path = {
 		img: `${build}/img/**/*.*`,
 		scss: `${src}/scss/**/*.scss`,
 		pug: `${src}/pug/**/*.pug`,
-		json: './html-data.json'
+		json: `${src}/data/html-data.json`
 	},
 	clean: `${build}`
 };
@@ -49,7 +47,7 @@ gulp.task('clean:build', function (callback) {
 	rimraf(path.clean, callback);
 });
 
-// Таск для сборки Gulp файлов
+// Таск для сборки Pug файлов
 gulp.task('pug', function (callback) {
 	return gulp.src(path.pug.src)
 		.pipe( plumber({
@@ -64,7 +62,7 @@ gulp.task('pug', function (callback) {
 		.pipe( pug({
 			pretty: true,
 			locals: {
-				jsonData: JSON.parse(fs.readFileSync(path.json.htmlData, 'utf8'))
+				jsonData: JSON.parse(fs.readFileSync(path.json, 'utf8'))
 			}
 		}) )
 		.pipe( gulp.dest(path.pug.build) )

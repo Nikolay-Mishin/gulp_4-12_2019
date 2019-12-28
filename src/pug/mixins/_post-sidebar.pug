@@ -1,0 +1,6 @@
+mixin post-sidebar(post)
+	.post-sidebar__wrapper
+		.post-sidebar__title= post.title
+		.post-sidebar__date= post.date
+		img(src="img/icons/" + post.img , alt= post.img_title).post-sidebar__img
+		.post__end

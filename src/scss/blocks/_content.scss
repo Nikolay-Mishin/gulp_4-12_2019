@@ -1,15 +1,14 @@
 /* Content */
 
 .content__wrapper {
-	width: 1000px;
+	width: 75%;
 	padding: 20px 0;
-	background-color: rgb(119, 176, 214);
-	text-align: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
 }
 
 .content {
-	width: 70%;
-	padding: 20px 0;
-	background-color: rgb(84, 121, 147);
-	text-align: center;
+	width: 75%;
 }

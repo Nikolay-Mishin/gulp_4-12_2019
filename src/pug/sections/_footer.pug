@@ -1,11 +1,12 @@
 include ./../mixins/_icon.pug
 
 footer.footer
-	each block in jsonData.footer_nav
-		.footer__block
-			each item in block
-				a(href= item.link).footer__link= item.name
+	.footer__wrapper
+		each block in jsonData.footer_nav
+			.footer__block
+				each item in block
+					a(href= item.link).footer__link= item.name
 
-	.footer__block.socials
-		each icon in jsonData.socials
-			+icon(icon.name, icon.link)
+		.footer__block.socials
+			each icon in jsonData.socials
+				+icon(icon.name, icon.link)

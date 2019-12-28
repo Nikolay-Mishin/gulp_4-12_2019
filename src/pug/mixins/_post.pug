@@ -1,12 +1,12 @@
-mixin post(title, date, img_title, img, content)
+mixin post(post)
 	.post__wrapper
-		.post__title= title
-		.post__date= date
-		img(src="img/icons/" + img , alt= title).post__img
-		.post__content= content
+		.post__title= post.title
+		.post__date= post.date
+		img(src="img/icons/" + post.img , alt= post.img_title).post__img
+		.post__content= post.content
 		.post__footer
 			a(href="index.html").btn-link read more
 			.socials
-				each icon in jsonData.socials
+				each icon in post.socials
 					+icon(icon.name, icon.link)
 		.post__end

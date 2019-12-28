@@ -1,0 +1,217 @@
+{
+	"socials": [
+		{
+			"name": "Instagramm",
+			"link": "instagram.svg"
+		},
+		{
+			"name": "Twitter",
+			"link": "twitter.svg"
+		},
+		{
+			"name": "Facebook",
+			"link": "facebook-f.svg"
+		}
+	],
+	"footer_nav": [
+		[
+			{
+				"name": "Latest Posts",
+				"link": "index.html"
+			},
+			{
+				"name": "Popular Posts",
+				"link": "about.html"
+			}
+		],
+		[
+			{
+				"name": "Search",
+				"link": "news.html"
+			},
+			{
+				"name": "Contact Information",
+				"link": "contacts.html"
+			}
+		],
+		[
+			{
+				"name": "Privacy Policy",
+				"link": "blog.html"
+			},
+			{
+				"name": "Terms of Use",
+				"link": "blog.html"
+			}
+		]
+	],
+	"posts": [
+		{
+			"title": "Статья 1",
+			"date": "Дата",
+			"img_title": "Instagramm",
+			"img": "instagram.svg",
+			"content": "Текст статьи",
+			"socials": [
+				{
+					"name": "WhatsApp",
+					"link": "whatsapp.svg"
+				},
+				{
+					"name": "Instagramm",
+					"link": "instagram.svg"
+				},
+				{
+					"name": "Twitter",
+					"link": "twitter.svg"
+				},
+				{
+					"name": "Facebook",
+					"link": "facebook-f.svg"
+				}
+			]
+		},
+		{
+			"title": "Статья 2",
+			"date": "Дата",
+			"img_title": "Twitter",
+			"img": "twitter.svg",
+			"content": "Текст статьи",
+			"socials": [
+				{
+					"name": "WhatsApp",
+					"link": "whatsapp.svg"
+				},
+				{
+					"name": "Instagramm",
+					"link": "instagram.svg"
+				},
+				{
+					"name": "Twitter",
+					"link": "twitter.svg"
+				},
+				{
+					"name": "Facebook",
+					"link": "facebook-f.svg"
+				}
+			]
+		},
+		{
+			"title": "Статья 3",
+			"date": "Дата",
+			"img_title": "Instagramm",
+			"img": "instagram.svg",
+			"content": "Текст статьи",
+			"socials": [
+				{
+					"name": "WhatsApp",
+					"link": "whatsapp.svg"
+				},
+				{
+					"name": "Instagramm",
+					"link": "instagram.svg"
+				},
+				{
+					"name": "Twitter",
+					"link": "twitter.svg"
+				},
+				{
+					"name": "Facebook",
+					"link": "facebook-f.svg"
+				}
+			]
+		},
+		{
+			"title": "Статья 4",
+			"date": "Дата",
+			"img_title": "WhatsApp",
+			"img": "whatsapp.svg",
+			"content": "Текст статьи",
+			"socials": [
+				{
+					"name": "WhatsApp",
+					"link": "whatsapp.svg"
+				},
+				{
+					"name": "Instagramm",
+					"link": "instagram.svg"
+				},
+				{
+					"name": "Twitter",
+					"link": "twitter.svg"
+				},
+				{
+					"name": "Facebook",
+					"link": "facebook-f.svg"
+				}
+			]
+		},
+		{
+			"title": "Статья 5",
+			"date": "Дата",
+			"img_title": "Facebook",
+			"img": "facebook-f.svg",
+			"content": "Текст статьи",
+			"socials": [
+				{
+					"name": "WhatsApp",
+					"link": "whatsapp.svg"
+				},
+				{
+					"name": "Instagramm",
+					"link": "instagram.svg"
+				},
+				{
+					"name": "Twitter",
+					"link": "twitter.svg"
+				},
+				{
+					"name": "Facebook",
+					"link": "facebook-f.svg"
+				}
+			]
+		}
+	],
+	"instagram": [
+		{
+			"name": "Twitter",
+			"link": "twitter.svg"
+		},
+		{
+			"name": "Twitter",
+			"link": "twitter.svg"
+		},
+		{
+			"name": "Twitter",
+			"link": "twitter.svg"
+		},
+		{
+			"name": "Twitter",
+			"link": "twitter.svg"
+		},
+		{
+			"name": "Twitter",
+			"link": "twitter.svg"
+		},
+		{
+			"name": "Twitter",
+			"link": "twitter.svg"
+		},
+		{
+			"name": "Twitter",
+			"link": "twitter.svg"
+		},
+		{
+			"name": "Twitter",
+			"link": "twitter.svg"
+		},
+		{
+			"name": "Twitter",
+			"link": "twitter.svg"
+		},
+		{
+			"name": "Twitter",
+			"link": "twitter.svg"
+		}
+	]
+}

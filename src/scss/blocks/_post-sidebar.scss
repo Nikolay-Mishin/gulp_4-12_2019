@@ -1,0 +1,45 @@
+/* Sidebar Post */
+
+.recent-posts, .popular-posts {
+	margin: 0 0 40px 0;
+}
+
+.post-sidebar__wrapper {
+	margin: 10px 0;
+	font-size: 16px;
+	color: #000;
+	font-weight: 600;
+	text-align: center;
+}
+
+.post-sidebar__btn {
+	display: block;
+	margin: 20px 0;
+	padding: 10px 30px;
+	border-radius: 3px;
+	font-size: 14px;
+	color: #000;
+	font-weight: 800;
+	text-decoration: none;
+	border: 1px solid black;
+}
+
+.post-sidebar__title {
+	font-weight: 600;
+	text-align: center;
+}
+
+.post-sidebar__date {
+	margin: 10px 0;
+	font-size: 8px;
+	color: rgb(128, 128, 128);
+	text-transform: uppercase;
+	font-weight: 400;
+	text-align: center;
+}
+
+.post-sidebar__img {
+	width: 100%;
+	height: 30px;
+	margin: 10px 0;
+}
