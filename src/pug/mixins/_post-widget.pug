@@ -1,0 +1,6 @@
+include ./_post-sidebar.pug
+
+mixin post-widget(posts, title)
+	a(href="index.html").post-sidebar__btn #{title}
+	each post in posts
+		+post-sidebar(post)
