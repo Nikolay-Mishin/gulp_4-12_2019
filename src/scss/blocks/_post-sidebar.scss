@@ -2,7 +2,7 @@
 
 .recent-posts, .popular-posts {
 	margin: 0 0 40px 0;
-	font: $font-post__title;
+	font-family: $font-post__title;
 	font-size: $fs-post-sidebar;
 	font-weight: $fw-post-sidebar;
 	text-align: center;
@@ -12,6 +12,10 @@
 	margin-bottom: 20px;
 	padding-bottom: 20px;
 	border-bottom: 1px solid $color-post-end;
+}
+
+.post-sidebar__wrapper:last-child {
+	border: none;
 }
 
 .post-sidebar__btn {
@@ -32,6 +36,7 @@
 
 .post-sidebar__date {
 	margin: 10px 0;
+	font-family: $font-base;
 	color: $color-post__date;
 	font-size: $fs-post-sidebar__date;
 	text-align: center;

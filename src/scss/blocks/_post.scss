@@ -6,10 +6,11 @@
 	font-weight: $fw-post;
 	margin-bottom: 30px;
 	border-bottom: 1px solid $color-post-end;
+	font-family: $font-base;
 }
 
 .post__title {
-	font: $font-post__title;
+	font-family: $font-post__title;
 	font-size: $fs-post__title;
 	text-align: center;
 }

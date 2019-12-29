@@ -7,12 +7,12 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	font-family: $font-base;
 }
 
 .header__link {
 	margin: 0 10px;
-	/* [Exo2.0] va = 0*/
-	font: $font-header;
+	font-family: $font-header;
 	color: $color-header;
 	font-size: $fs-header;
 }
