@@ -6,9 +6,12 @@
 
 body {
 	margin: 0;
-	font-family: sans-serif;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	/* [Montserrat] Medium va = 20 */
+	font-family: 100% $font-base;
+	color: $color-base;
+	font-weight: $font-weight-base;
 }

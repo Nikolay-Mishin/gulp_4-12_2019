@@ -32,6 +32,10 @@ const path = {
 		build: `${build}/img/`,
 		src: `${src}/img/**/*.*`
 	},
+	fonts: {
+		build: `${build}/fonts/`,
+		src: `${src}/fonts/**/*.*`
+	},
 	watch: {
 		js: `${build}/js/**/*.js`,
 		img: `${build}/img/**/*.*`,
@@ -107,6 +111,13 @@ gulp.task('copy:js', function (callback) {
 	callback();
 });
 
+// Таск для копирования шрифтов
+gulp.task('copy:fonts', function (callback) {
+	return gulp.src(path.fonts.src)
+		.pipe(gulp.dest(path.fonts.build))
+	callback();
+});
+
 // Слежение за HTML и CSS и обновление браузера
 gulp.task('watch', function() {
 	// Следим за картинками и скриптами и обновляем браузер
@@ -138,6 +149,6 @@ gulp.task('server', function() {
 // Запускаем одновременно задачи server и watch
 gulp.task('default', gulp.series(
 	gulp.parallel('clean:build'),
-	gulp.parallel('scss', 'pug', 'copy:img', 'copy:js'),
+	gulp.parallel('scss', 'pug', 'copy:img', 'copy:js', 'copy:fonts'),
 	gulp.parallel('server', 'watch')
 ));

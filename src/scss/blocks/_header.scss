@@ -1,7 +1,7 @@
 /* Header */
 
 .header {
-	width: 100%;
+	width: $header-width;
 	padding: 30px;
 	display: flex;
 	flex-direction: row;
@@ -11,9 +11,10 @@
 
 .header__link {
 	margin: 0 10px;
-	font-size: 20px;
-	color: #000;
-	font-weight: 800;
+	/* [Exo2.0] va = 0*/
+	font: $font-header;
+	color: $color-header;
+	font-size: $fs-header;
 }
 
 .header__block {

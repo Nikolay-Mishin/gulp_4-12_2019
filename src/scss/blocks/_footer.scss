@@ -1,18 +1,18 @@
 /* Footer */
 
 .footer {
-	width: 100%;
+	background-color: $bg-footer;
+	width: $footer-width;
 	padding: 30px 100px;
-	background-color: rgb(196, 196, 196);
-	text-align: center;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 }
 
 .footer__wrapper {
-	width: 1000px;
+	width: $footer__wrapper-width;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -28,7 +28,6 @@
 
 .footer__link {
 	margin: 10px 0;
-	font-size: 16px;
-	color: #808080;
-	font-weight: 600;
+	color: $color-footer;
+	font-size: $fs-footer;
 }
